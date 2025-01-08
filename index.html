@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skuterlarga Bog'liq Muammo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Skuterlarga Bog'liq Muammo</h1>
+        
+        <div class="form-group">
+            <label for="name">Foydalanuvchi Ismi:</label>
+            <input type="text" id="name" placeholder="Ism" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="age">Yoshi:</label>
+            <input type="number" id="age" placeholder="Yosh" min="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="issue">Muammo joyini tanlang:</label>
+            <select id="issue">
+                <option value="g'ildirak">G'ildirak</option>
+                <option value="motor">Motor</option>
+                <option value="batareya">Batareya</option>
+                <option value="tormoz">Tormoz</option>
+                <option value="chiroq">Chiroq</option>
+                <option value="boshqaruv">Boshqaruv</option>
+            </select>
+        </div>
+        
+        <button onclick="predictIssue()">Muammoni taxmin qiling</button>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function predictIssue() {
+            const name = document.getElementById('name').value;
+            const age = parseInt(document.getElementById('age').value);
+            const issue = document.getElementById('issue').value;
+            const resultDiv = document.getElementById('result');
+
+            if (!name || !age || age <= 0) {
+                resultDiv.innerHTML = 'Iltimos, ism va yoshni to\'g\'ri kiriting.';
+                return;
+            }
+
+            let issuePrediction = '';
+
+            switch (issue) {
+                case "g'ildirak":
+                    issuePrediction = "G'ildirak balansidan yoki shinalarning eskirganligidan muammo bo'lishi mumkin.";
+                    break;
+                case 'motor':
+                    issuePrediction = "Motor ishlamayapti yoki qizib ketmoqda.";
+                    break;
+                case 'batareya':
+                    issuePrediction = "Batareya quvvati tugagan yoki nosoz.";
+                    break;
+                case 'tormoz':
+                    issuePrediction = "Tormoz tizimida muammo yoki eskirgan bo'lishi mumkin.";
+                    break;
+                case 'chiroq':
+                    issuePrediction = "Chiroqlar ishlamayapti yoki elektr muammosi.";
+                    break;
+                case 'boshqaruv':
+                    issuePrediction = "Boshqaruv tizimida nosozlik mavjud.";
+                    break;
+                default:
+                    issuePrediction = "Tanlangan muammo joyini qayta tekshiring.";
+                    break;
+            }
+
+            resultDiv.innerHTML = `${name} uchun taxminiy muammo: ${issuePrediction}`;
+        }
+    </script>
+</body>
+</html>
